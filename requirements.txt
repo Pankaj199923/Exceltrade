@@ -4,3 +4,5 @@ python-socketio==5.11.2
 openpyxl==3.1.2
 watchdog==4.0.1
 requests==2.32.3
+xlwings==0.31.4
+pywin32==306; platform_system == "Windows"

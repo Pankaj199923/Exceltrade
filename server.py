@@ -16,7 +16,7 @@ from flask_socketio import SocketIO
 import os
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "change-this-secret-key"
+app.config["SECRET_KEY"] = "mysecretkey123"
 socketio = SocketIO(app, cors_allowed_origins="*")
 
 # In-memory store — latest sheet data (naya client connect hote hi ye bhej denge)
@@ -28,7 +28,7 @@ latest_data = {
 }
 
 # Simple shared-secret so koi bhi random banda tumhare server ko update na kar paaye
-API_KEY = os.environ.get("EXCEL_DASHBOARD_KEY", "my-secret-key-123")
+API_KEY = os.environ.get("EXCEL_DASHBOARD_KEY", "mysecretkey123")
 
 
 @app.route("/")
