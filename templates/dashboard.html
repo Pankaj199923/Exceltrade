@@ -554,20 +554,28 @@
     setTrackContent(tapeTrack, itemsHtml, 65);
   }
 
+  let lastTapeSignature = null;
+
   function refreshTape(headers, rows) {
     const snapshotHtml = buildSnapshotItems(headers, rows);
+    let html;
     if (tapeLog.length > 0) {
-      const diffHtml = tapeLog.map(e => `
+      html = tapeLog.map(e => `
         <div class="tape-item">
           <span class="field">${escapeHtml(e.field)}</span>
           <span>R${e.row}</span>
           <span>${formatNumber(e.from)} → </span>
           <span class="${e.up ? 'up' : 'down'}">${formatNumber(e.to)} ${e.up ? '▲' : '▼'}</span>
         </div>`).join('');
-      setTapeContent(diffHtml);
     } else {
-      setTapeContent(snapshotHtml);
+      html = snapshotHtml;
     }
+
+    // Content wahi hai to tape ko chhedo mat — animation apni running cycle poori karega,
+    // sirf tabhi restart hoga jab A17:A21 ki value sach mein badle
+    if (html === lastTapeSignature) return;
+    lastTapeSignature = html;
+    setTapeContent(html);
   }
 
   // Placeholder tape turant chalu ho jaaye, data load hone se pehle hi
